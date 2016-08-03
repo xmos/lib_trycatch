@@ -8,7 +8,7 @@ const unsigned myED = 456;
 
 int foo(void) {
   exception_t e = {myET, myED};
-  THROW(e)
+  THROW(e);
   // noreturn
 }
 
