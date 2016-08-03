@@ -1,3 +1,4 @@
+// Copyright (c) 2016, XMOS Ltd, All rights reserved
 
 static const unsigned myET = 123;
 static const unsigned myED = 456;

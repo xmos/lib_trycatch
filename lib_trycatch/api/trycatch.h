@@ -1,4 +1,4 @@
-// Copyright (c) 2013,2016 XMOS Ltd., All rights reserved
+// Copyright (c) 2016, XMOS Ltd, All rights reserved
 
 #ifndef _trycatch_h_
 #define _trycatch_h_
