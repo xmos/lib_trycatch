@@ -114,4 +114,11 @@ Here is a complete example (build using -O0)::
     return 0;
   }
 
+|appendix|
 
+Known Issues
+------------
+
+No known issues.
+
+.. include:: ../../../CHANGELOG.rst

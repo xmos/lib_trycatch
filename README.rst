@@ -1,8 +1,8 @@
-xCORE trycatch Library
+xCORE trycatch library
 ======================
 
-Overview
---------
+Summary
+-------
 
 A library providing a way to handle hardware and soft exceptions.
 
