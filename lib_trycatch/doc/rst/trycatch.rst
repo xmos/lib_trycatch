@@ -114,6 +114,25 @@ Here is a complete example (build using -O0)::
     return 0;
   }
 
+API
+---
+
+Supporting types
+................
+
+.. doxygenstruct:: exception_t
+
+|newpage|
+
+Macros
+......
+
+.. doxygendefine:: TRY
+
+.. doxygendefine:: CATCH
+
+.. doxygendefine:: THROW
+
 |appendix|
 
 Known Issues
