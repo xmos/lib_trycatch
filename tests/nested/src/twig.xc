@@ -2,7 +2,7 @@
 
 #include <xs1.h>
 #include "trycatch.h"
-#include "debug_print.h" 
+#include "debug_print.h"
 #include "test.h"
 
 int twig(int v) {

@@ -1,7 +1,7 @@
 // Copyright (c) 2016, XMOS Ltd, All rights reserved
 
 #include "trycatch.h"
-#include "debug_print.h" 
+#include "debug_print.h"
 
 const unsigned myET = 123;
 const unsigned myED = 456;

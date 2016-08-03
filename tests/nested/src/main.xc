@@ -1,7 +1,7 @@
 // Copyright (c) 2016, XMOS Ltd, All rights reserved
 
 #include "trycatch.h"
-#include "debug_print.h" 
+#include "debug_print.h"
 #include "test.h"
 
 int main() {

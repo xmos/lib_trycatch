@@ -41,10 +41,10 @@ typedef struct exception_t {
  *  catch block. The operand of the CATCH macro is populated with information
  *  about the raised exception. The catch block is not executed if no exception
  *  is raised.
- * 
+ *
  *  The TRY and CATCH macros are implemented using setjmp() and longjmp() and
  *  have the following limitations.
- * 
+ *
  *    * xCORE resources allocated inside the TRY block may not be freed if an
  *      exception is raised.
  *    * If an exception is raised the values of local variables changed

@@ -3,7 +3,7 @@
 // xs1.h pulls in 'XS1_ET_' defines.
 #include <xs1.h>
 #include "trycatch.h"
-#include "debug_print.h" 
+#include "debug_print.h"
 
 int divide(int dividend, int divisor) {
   return dividend / divisor;

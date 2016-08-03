@@ -25,6 +25,6 @@ void trycatch_exit(void);
 
 int trycatch_catch(REFERENCE_PARAM(exception_t, exception));
 
-__attribute__((noreturn)) void trycatch_throw(unsigned type, unsigned data); 
+__attribute__((noreturn)) void trycatch_throw(unsigned type, unsigned data);
 
 #endif //_trycatch_impl_h_
