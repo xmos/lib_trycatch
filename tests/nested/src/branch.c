@@ -1,4 +1,3 @@
-// Copyright (c) 2016, XMOS Ltd, All rights reserved
 
 #include "test.h"
 #include "debug_print.h"
