@@ -11,7 +11,7 @@ const unsigned myED = 456;
 int foo(void) {
   exception_t e = {myET, myED};
   THROW(e);
- return 0; 
+ return 0;
 }
 
 int divide(int dividend, int divisor) {

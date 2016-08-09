@@ -1,4 +1,4 @@
-// Copyright (c) 2013,2016 XMOS Ltd., All rights reserved
+// Copyright (c) 2013-2016, XMOS Ltd, All rights reserved
 
 #ifndef _trycatch_h_
 #define _trycatch_h_
@@ -11,16 +11,33 @@
 /** Structure describing an exception.
  *
  *  The following hardware exception types are defined by xs1.h:
- *     XS1_ET_NONE, XS1_ET_LINK_ERROR, XS1_ET_ILLEGAL_PC,
- *     XS1_ET_ILLEGAL_INSTRUCTION, XS1_ET_ILLEGAL_RESOURCE,
- *     XS1_ET_LOAD_STORE, XS1_ET_ILLEGAL_PS, XS1_ET_ARITHMETIC,
- *     XS1_ET_ECALL, XS1_ET_RESOURCE_DEP, XS1_ET_KCALL
+ *
+ *    - XS1_ET_NONE
+ *    - XS1_ET_LINK_ERR0R
+ *    - XS1_ET_ILLEGAL_PC
+ *    - XS1_ET_ILLEGAL_INSTRUCTION
+ *    - XS1_ET_ILLEGAL_RESOURCE
+ *    - XS1_ET_LOAD_STORE
+ *    - XS1_ET_ILLEGAL_PS
+ *    - XS1_ET_ARITHMETIC
+ *    - XS1_ET_ECALL
+ *    - XS1_ET_RESOURCE_DEP
+ *    - XS1_ET_KCALL
+ *
  *  Please see 'The XMOS XS* Architecture' document for further details.
  *
  *  Runtime errors in software are trapped using an XS1_ET_ECALL hardware
  *  exception.
  *
  *  Values greater than 255 should be used for a 'thrown' soft exception type.
+ *
+ * \cond DOXYGEN_IGNORED_BLOCK
+ *
+ * In the above list of exception types the word error is deliberately spelt
+ * with a zero to work around an xdoc bug #17453 - the exception type is really:
+ * XS1_ET_LINK_ERROR
+ *
+ * \endcond
  */
 typedef struct exception_t {
   unsigned type;  /**< Exception type */
@@ -41,17 +58,17 @@ typedef struct exception_t {
  *  catch block. The operand of the CATCH macro is populated with information
  *  about the raised exception. The catch block is not executed if no exception
  *  is raised.
- * 
+ *
  *  The TRY and CATCH macros are implemented using setjmp() and longjmp() and
- *  have the following limitations.
- * 
- *    * xCORE resources allocated inside the TRY block may not be freed if an
+ *  have the following limitations:
+ *
+ *    - xCORE resources allocated inside the TRY block may not be freed if an
  *      exception is raised.
- *    * If an exception is raised the values of local variables changed
+ *    - If an exception is raised the values of local variables changed
  *      inside the try block are indeterminate.
- *    * If the code inside the try block spawns task onto additional logical
+ *    - If the code inside the try block spawns task onto additional logical
  *      cores, exceptions on these logical cores will not be caught.
- *    * The compiler may remove code that has no other side effects beyond
+ *    - The compiler may remove code that has no other side effects beyond
  *      raising an exception.
  */
 #define TRY \
@@ -61,8 +78,11 @@ typedef struct exception_t {
       trycatch_enter(ADDRESS_OF trycatch_try); \
       do
 
-/** Macro for catching an exception. This must be used in conjunction
- *  with the TRY macros, see documentation of TRY for more details.
+/** Macro for catching an exception.
+ *  This must be used in conjunction with the TRY macros, see documentation of
+ *  TRY for more details.
+ *
+ * \param exception   the unique exception variable for this trycatch block
  */
 #define CATCH(exception) \
       while(0); \

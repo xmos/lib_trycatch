@@ -1,4 +1,4 @@
-// Copyright (c) 2013,2016 XMOS Ltd., All rights reserved
+// Copyright (c) 2013-2016, XMOS Ltd, All rights reserved
 
 #include <setjmp.h>
 #include "trycatch.h"
@@ -45,8 +45,9 @@ void trycatch_exit(void) {
 }
 
 int trycatch_catch(exception_t *exception) {
-  if (trycatch_state.exception.type == XS1_ET_NONE)
+  if (trycatch_state.exception.type == XS1_ET_NONE) {
     return 0;
+  }
   *exception = trycatch_state.exception;
   trycatch_state.exception.type = XS1_ET_NONE;
   return 1;

@@ -73,9 +73,9 @@ The easiest way to do this is to make it an auto variable (on the stack)::
 
 The ``TRY`` clause is followed immediately by a statement (or statement block)
 that is executed::
-  
+
     TRY
-      may_exception_func(); 
+      may_exception_func();
 
 and this followed immediately by ``CATCH`` and a statement (or statement block)
 that is executed only if an exception was caught::
@@ -89,7 +89,7 @@ Here is a complete example (build using -O0)::
   // xs1.h pulls in 'XS1_ET_' constants.
   #include <xs1.h>
   #include "trycatch.h"
-  #include "debug_print.h" 
+  #include "debug_print.h"
 
   int divide(int dividend, int divisor) {
     // Uncomment to send an unexpected soft exception.
@@ -114,4 +114,30 @@ Here is a complete example (build using -O0)::
     return 0;
   }
 
+API
+---
 
+Supporting types
+................
+
+.. doxygenstruct:: exception_t
+
+|newpage|
+
+Macros
+......
+
+.. doxygendefine:: TRY
+
+.. doxygendefine:: CATCH
+
+.. doxygendefine:: THROW
+
+|appendix|
+
+Known Issues
+------------
+
+No known issues.
+
+.. include:: ../../../CHANGELOG.rst
