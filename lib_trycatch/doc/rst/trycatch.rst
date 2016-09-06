@@ -66,7 +66,7 @@ and a function that calls it, that must catch those exceptions::
   void no_exception_func() {
 
 we must call ``may_exception_func`` in a trycatch block, providing
-a unique ``exception_t`` variable for this trycatch block.
+a thread safe ``exception_t`` variable for this trycatch block.
 The easiest way to do this is to make it an auto variable (on the stack)::
 
     exception_t exception;
@@ -84,7 +84,7 @@ that is executed only if an exception was caught::
       debug_printf("exception: type=%d data=%d\n",
                     exception.type, exception.data);
 
-Here is a complete example (build using -O0)::
+Here is a complete example (build using -O0 to make sure the divide happens)::
 
   // xs1.h pulls in 'XS1_ET_' constants.
   #include <xs1.h>
