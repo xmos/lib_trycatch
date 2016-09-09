@@ -4,8 +4,8 @@
 #define _trycatch_h_
 
 /** \file trycatch.h
- *  This file contains macros that allow you to handle hardware &
- *  soft exceptions raised on the current logical core.
+ *  This file contains macros that allow you to handle hardware and
+ *  thrown exceptions raised on the current logical core.
  */
 
 /** Structure describing an exception.
@@ -13,7 +13,7 @@
  *  The following hardware exception types are defined by xs1.h:
  *
  *    - XS1_ET_NONE
- *    - XS1_ET_LINK_ERR0R
+ *    - XS1_ET_LINK_ERROR
  *    - XS1_ET_ILLEGAL_PC
  *    - XS1_ET_ILLEGAL_INSTRUCTION
  *    - XS1_ET_ILLEGAL_RESOURCE
@@ -29,7 +29,7 @@
  *  Runtime errors in software are trapped using an XS1_ET_ECALL hardware
  *  exception.
  *
- *  Values greater than 255 should be used for a 'thrown' soft exception type.
+ *  Values greater than 255 should be used for a 'thrown' exception type.
  *
  * \cond DOXYGEN_IGNORED_BLOCK
  *
@@ -65,8 +65,8 @@ typedef struct exception_t {
  *    - xCORE resources allocated inside the TRY block may not be freed if an
  *      exception is raised.
  *    - If an exception is raised the values of local variables changed
- *      inside the try block are indeterminate.
- *    - If the code inside the try block spawns task onto additional logical
+ *      inside the TRY block are indeterminate.
+ *    - If the code inside the TRY block spawns task onto additional logical
  *      cores, exceptions on these logical cores will not be caught.
  *    - The compiler may remove code that has no other side effects beyond
  *      raising an exception.
@@ -82,7 +82,7 @@ typedef struct exception_t {
  *  This must be used in conjunction with the TRY macros, see documentation of
  *  TRY for more details.
  *
- * \param exception   the unique exception variable for this trycatch block
+ * \param exception   the unique exception variable for this TRY-CATCH block
  */
 #define CATCH(exception) \
       while(0); \
@@ -92,7 +92,7 @@ typedef struct exception_t {
   if (!trycatch_catch(ADDRESS_OF exception)) {} else
 
 
-/** Macro for throwing a soft exception.
+/** Macro for throwing an exception.
  *  This must only be called from within an active TRY-CATCH block as
  *  follows:
  *  \code
@@ -109,7 +109,7 @@ typedef struct exception_t {
  *  }
  *  \endcode
  *
- *  \param exception   the soft exception to be thrown
+ *  \param exception   the exception to be thrown
  */
 #define THROW(exception) \
   trycatch_throw(exception.type, exception.data)
