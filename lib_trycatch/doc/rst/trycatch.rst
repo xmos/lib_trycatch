@@ -4,7 +4,7 @@ Usage
 -----
 
 This library contains macros that allow you to handle hardware and
-software exceptions raised on the current logical core.
+thrown exceptions raised on the current logical core.
 
 All functions can be accessed via the ``trycatch.h`` header::
 
@@ -36,7 +36,7 @@ catch block. The operand of the CATCH macro is populated with information
 about the raised exception. The catch block is not executed if no exception
 is raised.
 
-A software exception may be raised using the THROW macro as follows::
+An exception may be raised using the THROW macro as follows::
 
   exception_t e = {256,0};
   THROW(e);
@@ -84,7 +84,7 @@ Here is a complete example (build using -O0 to make sure the divide happens)::
   #include "debug_print.h"
 
   int divide(int dividend, int divisor) {
-    // Uncomment to send an unexpected software exception.
+    // Uncomment to send an unexpected exception.
     // exception_t e = {256,0};
     // THROW(e);
     return dividend / divisor;

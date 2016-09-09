@@ -4,7 +4,7 @@ xCORE trycatch library
 Summary
 -------
 
-A library providing a way to handle hardware and software exceptions.
+A library providing a way to handle hardware and thrown exceptions.
 
 By default, exception are caught in a trap handler that halts the tile, awaiting
 external intervention.
@@ -19,8 +19,8 @@ recently registered trycatch block. The catch clause is then executed.
 Features
 ........
 
-  * Catches hardware and software generated exceptions
-  * User may ``throw`` software exceptions.
+  * Catches hardware generated and thrown exceptions
+  * User may ``throw`` exceptions.
   * Trycatch blocks may be nested.
 
 Limitations

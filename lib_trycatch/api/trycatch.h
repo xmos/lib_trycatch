@@ -4,8 +4,8 @@
 #define _trycatch_h_
 
 /** \file trycatch.h
- *  This file contains macros that allow you to handle hardware &
- *  software exceptions raised on the current logical core.
+ *  This file contains macros that allow you to handle hardware and
+ *  thrown exceptions raised on the current logical core.
  */
 
 /** Structure describing an exception.
@@ -29,7 +29,7 @@
  *  Runtime errors in software are trapped using an XS1_ET_ECALL hardware
  *  exception.
  *
- *  Values greater than 255 should be used for a 'thrown' software exception type.
+ *  Values greater than 255 should be used for a 'thrown' exception type.
  *
  * \cond DOXYGEN_IGNORED_BLOCK
  *
@@ -92,7 +92,7 @@ typedef struct exception_t {
   if (!trycatch_catch(ADDRESS_OF exception)) {} else
 
 
-/** Macro for throwing a software exception.
+/** Macro for throwing an exception.
  *  This must only be called from within an active TRY-CATCH block as
  *  follows:
  *  \code
@@ -109,7 +109,7 @@ typedef struct exception_t {
  *  }
  *  \endcode
  *
- *  \param exception   the software exception to be thrown
+ *  \param exception   the exception to be thrown
  */
 #define THROW(exception) \
   trycatch_throw(exception.type, exception.data)
