@@ -3,8 +3,8 @@
 Usage
 -----
 
-This library contains macros that allow you to handle hardware &
-soft exceptions raised on the current logical core.
+This library contains macros that allow you to handle hardware and
+software exceptions raised on the current logical core.
 
 All functions can be accessed via the ``trycatch.h`` header::
 
@@ -36,23 +36,13 @@ catch block. The operand of the CATCH macro is populated with information
 about the raised exception. The catch block is not executed if no exception
 is raised.
 
-A soft exception may be raised using the THROW macro as follows::
+A software exception may be raised using the THROW macro as follows::
 
   exception_t e = {256,0};
   THROW(e);
 
 The TRY, CATCH and THROW macros are implemented using setjmp() and longjmp()
-and have the following limitations.
-
-  * xCORE resources allocated inside the TRY block may not be freed if an
-    exception is raised.
-  * If an exception is raised the values of local variables changed
-    inside the try block are indeterminate.
-  * If the code inside the try block spawns task onto additional logical
-    cores, exceptions on these logical cores will not be caught.
-  * The compiler may remove code that has no other side effects beyond
-    raising an exception.
-
+and have the limitations specified in the `Limitations`_ section.
 
 Example
 .......
@@ -63,7 +53,7 @@ If we have a function that may cause an exception to fire::
 
 and a function that calls it, that must catch those exceptions::
 
-  void no_exception_func() {
+  void no_exception_func();
 
 we must call ``may_exception_func`` in a trycatch block, providing
 a thread safe ``exception_t`` variable for this trycatch block.
@@ -74,15 +64,17 @@ The easiest way to do this is to make it an auto variable (on the stack)::
 The ``TRY`` clause is followed immediately by a statement (or statement block)
 that is executed::
 
-    TRY
+    TRY {
       may_exception_func();
+    }
 
 and this followed immediately by ``CATCH`` and a statement (or statement block)
 that is executed only if an exception was caught::
 
-    CATCH (exception)
+    CATCH (exception) {
       debug_printf("exception: type=%d data=%d\n",
                     exception.type, exception.data);
+    }
 
 Here is a complete example (build using -O0 to make sure the divide happens)::
 
@@ -92,7 +84,7 @@ Here is a complete example (build using -O0 to make sure the divide happens)::
   #include "debug_print.h"
 
   int divide(int dividend, int divisor) {
-    // Uncomment to send an unexpected soft exception.
+    // Uncomment to send an unexpected software exception.
     // exception_t e = {256,0};
     // THROW(e);
     return dividend / divisor;
@@ -105,11 +97,12 @@ Here is a complete example (build using -O0 to make sure the divide happens)::
       debug_printf("Unexpected success: %d\n", result);
     }
     CATCH (exception) {
-      if (exception.type == XS1_ET_ARITHMETIC)
+      if (exception.type == XS1_ET_ARITHMETIC) {
         debug_printf("Divide by zero caught\n");
-      else
+      } else {
         debug_printf("Unexpected exception: type=%d data=%d\n",
                       exception.type, exception.data);
+      }
     }
     return 0;
   }

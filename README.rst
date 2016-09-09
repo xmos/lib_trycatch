@@ -4,23 +4,23 @@ xCORE trycatch library
 Summary
 -------
 
-A library providing a way to handle hardware and soft exceptions.
+A library providing a way to handle hardware and software exceptions.
 
-By default, exception are caught in a trap handler that halts, awaiting
+By default, exception are caught in a trap handler that halts the tile, awaiting
 external intervention.
-This library handles exceptions by unwinding the stack, to the most
-recently registered trycatch block, where upon the catch clause is executed.
+This library handles exceptions by unwinding the stack to the most
+recently registered trycatch block. The catch clause is then executed.
 
-N.B. trycatch can not be used to implement commit-rollback semantics.
-Resources are not returned to their pre-try-state.
-The user is required to handle exception safety of global memory and other
-resources.
+.. note:: This library can not be used to implement commit-rollback semantics.
+          Resources are not returned to their pre-try state.
+          The user is required to handle exception safety of global memory and other
+          resources.
 
 Features
 ........
 
-  * Catches hardware and soft generated exceptions
-  * User may throw soft exceptions.
+  * Catches hardware and software generated exceptions
+  * User may ``throw`` software exceptions.
   * Trycatch blocks may be nested.
 
 Limitations
