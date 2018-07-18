@@ -1,4 +1,11 @@
 
+export TRYCATCH_AS_LIBRARY
+ifeq ($(TRYCATCH_AS_LIBRARY),1)
+  LIBRARIES = trycatch trycatch_xs1b trycatch_xs2a
+  LIB_ARCH_trycatch = xs1b xs2a
+  LIB_ARCH_trycatch_xs2a = xs2a
+endif
+
 VERSION = 1.0.0
 
 INCLUDE_DIRS = src api
