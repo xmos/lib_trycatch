@@ -19,11 +19,17 @@ typedef struct typecatch_try_t {
 #define ADDRESS_OF &
 #endif
 
+#if defined(__cplusplus)
+extern "C" {
+#endif
 void trycatch_enter(REFERENCE_PARAM(typecatch_try_t, buf));
 
 void trycatch_exit(void);
 
 int trycatch_catch(REFERENCE_PARAM(exception_t, exception));
+#if defined(__cplusplus)
+}
+#endif
 
 __attribute__((noreturn)) void trycatch_throw(unsigned type, unsigned data);
 
