@@ -6,7 +6,7 @@
 .globl trycatch_trap_handler
 .type trycatch_trap_handler, @function
 .align XS1_KEP_ALIGNMENT
-#ifdef __XS2A__
+#if !defined(__XS1B__)
 .issue_mode single
 trycatch_trap_handler:
   ENTSP_lu6 0
@@ -30,7 +30,7 @@ trycatch_trap_handler:
 
   // Store et and ed.
   get r11, et
-#ifdef __XS2A__
+#if !defined(__XS1B__)
   // An additional et bit (0x16) indicates
   // the lane that caused the exception.
   zext r11, 4
@@ -42,7 +42,7 @@ trycatch_trap_handler:
   // Leave kernel mode.
   kret
 
-#ifdef __XS2A__
+#if !defined(__XS1B__)
 .align 4
 .issue_mode single
 return_from_exception:
